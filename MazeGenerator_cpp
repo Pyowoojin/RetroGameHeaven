@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+#include <random>
+using namespace std;
+
+int dx[4] = { 1,0,-1,0 };
+int dy[4] = { 0,1,0,-1 };
+
+class cell {
+public :
+	int entrance;
+	bool visited;
+
+	cell() {
+		// 뚫려있는 벽을 의미함.
+		// ↑→↓← 순서로 1000, 0100, 0010, 0001
+		entrance = 0x0000;
+		// 방문 배열 의미
+		visited = false;
+	}
+	~cell() {};
+
+};
+
+template <typename T>
+void prt(vector <T>& vc) {
+	for (int i = 0; i < vc.size(); i++) {
+		for (int j = 0; j < vc[0].size(); j++) {
+			cout << vc[i][j].entrance << " ";
+		}
+		cout << endl;
+	}
+}
+
+// 0~3 랜덤 생성 함수
+int RandomNum() {
+	random_device rd;
+	mt19937 engine(rd());
+
+	uniform_int_distribution <int> dist(0, 3);
+
+	return dist(engine);
+}
+
+
+// 방문하려는 점이 범위를 벗어나지 않는지 체크하는 함수
+template <typename T>
+bool isValid(int x, int y, vector <T> &vc) {
+	cout << (x > -1 && y > -1 && x > vc.size() && y > vc[0].size());
+	return 1;
+}
+
+void backtracking(vector <vector <cell>> &vc, int startX, int startY) {
+	stack <pair <int,int>> stk;
+	pair <int, int> tmp;
+	stk.push({ startX, startY });
+
+	vc[startX][startY].visited = true;
+	
+
+	while (!stk.empty()) {
+		tmp = stk.top(); stk.pop();
+
+		int nowX = tmp.first;
+		int nowY = tmp.second;
+
+		// 일단 주변에 방문하지 않은 노드가 있는지 확인해야함.
+
+		// 방문하지 않은 방향의 번호를 저장하는 벡터
+		vector <int> notVisitedList;
+
+		for (int i = 0; i < 4; i++) {
+			int nextX = nowX + dx[i];
+			int nextY = nowY + dy[i];
+		}
+	}
+}
+
+
+int main() {
+	cin.tie(0);
+	cout.tie(0);
+	ios_base::sync_with_stdio(0);
+
+	vector <cell> vc2(3);
+	vector <vector <cell>> vc(3, vc2);
+
+	isValid(5, 5, vc);
+	isValid(0, 2, vc);
+
+}
